@@ -23,7 +23,7 @@ const relatedWordsEndpoints = new Map([
 
 const wordDefinationsEndpoints = new Map([
     ["input", "input"],
-    ["Definitions", "definitions"],
+    ["Definition", "definitions"],
     ["Synonyms", "synonyms"],
     ["Antonyms", "antonyms"],
     ["Examples", "examples"],
@@ -32,18 +32,21 @@ const wordDefinationsEndpoints = new Map([
     ["Syllables", "syllables"]
 ])
 
-
-const url = 'https://wordsapiv1.p.rapidapi.com/words/hatchback/hasTypes';
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '2fc7fe89abmsh68aeb886c1c625ep1b9607jsn4cece20a50db',
-        'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-    }
-};
-
 async function triggerWordsAPI() {
-    const response = await fetch(url, options);
-    const result = await response.text();
-    console.log(result);
+    try {
+        const word = document.querySelector('#wordInput').value;
+        const url = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '2fc7fe89abmsh68aeb886c1c625ep1b9607jsn4cece20a50db',
+                'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+            }
+        };
+        const response = await fetch(url, options);
+        const result = await response.text();
+        document.querySelector('#output').innerText = result;
+    } catch (error) {
+        document.querySelector('#output').innerText = error;
+    }
 }
