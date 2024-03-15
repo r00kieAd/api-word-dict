@@ -1,4 +1,4 @@
-const relatedWordsEndpoints = new Map([
+const relatedWordsEndpoints = new Map<String, String>([
     ["Is a Type Of", "typeOf"],
     ["Has Types", "hasTypes"],
     ["Part Of", "partOf"],
@@ -21,7 +21,8 @@ const relatedWordsEndpoints = new Map([
     ["Pertains To", "pertainsTo"]
 ]);
 
-const wordDefinationsEndpoints = new Map([
+
+const wordDefinationsEndpoints = new Map<String, String>([
     ["input", "input"],
     ["Definition", "definitions"],
     ["Synonyms", "synonyms"],
@@ -34,8 +35,10 @@ const wordDefinationsEndpoints = new Map([
 
 async function triggerWordsAPI() {
     try {
-        const word = document.querySelector('#wordInput').value;
-        const url = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
+        const word = ($('#wordInput').val() == '') ? alert('no value entered') : $('#wordInput').val();
+        const endpoint = wordDefinationsEndpoints.get('input');
+        console.log(word)
+        const url = `https://wordsapiv1.p.rapidapi.com/words/${word}/${endpoint}`;
         const options = {
             method: 'GET',
             headers: {
@@ -45,8 +48,22 @@ async function triggerWordsAPI() {
         };
         const response = await fetch(url, options);
         const result = await response.text();
-        document.querySelector('#output').innerText = result;
+        $('#output').text() = result;
     } catch (error) {
-        document.querySelector('#output').innerText = error;
+        $('#output').text() = error;
     }
 }
+
+// DOM
+$(".endpoints .dropdown-menu .dropdown-item").click(
+    function() {
+        $('#setValue').text($(this).text());
+    }
+)
+
+
+$('#getValue').click(
+    function() {
+        triggerWordsAPI();
+    }
+)
