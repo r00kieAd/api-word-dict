@@ -98,9 +98,15 @@ $(".endpoints .dropdown-menu .dropdown-item").click(
         const oldText = $('#setValue').text();
         $('#setValue').text(newText);
         $(this).text(oldText);
+        $('#dropicon').css('transform', 'rotate(360deg)');
     }
 )
 
+$('#setValue').click(
+    function () {
+        $('#dropicon').css('transform', 'rotate(180deg)');
+    }
+)
 
 $('#getValue').click(
     function () {
