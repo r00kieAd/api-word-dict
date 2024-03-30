@@ -2,6 +2,10 @@ body {
     background-image: url("images/background-2.png");
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
 }
 
 #main {
@@ -9,10 +13,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 35rem;
+    width: 30rem;
     border: 1px solid #e48a60;
     border-radius: 12px;
     background-color: #e48a60;
+    box-shadow: 1px 1px 2px #8b4e42;
 }
 
 #sub-main {
@@ -31,8 +36,12 @@ body {
     margin-bottom: 1.5rem;
 }
 
+#wordInput {
+    border-color: #f1cea1;
+}
+
 #wordInput:focus {
-    border-color: #e48a60;
+    border-color: #8b4e42;
     outline: none !important;
     box-shadow: none !important;
 }
@@ -57,17 +66,39 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* align-items: center; */
     width: fit-content;
     height: fit-content;
+    margin-top: 1.3rem;
 }
 
 #setValue {
     margin-right: 0.5rem;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dropdown-menu {
+    border: none !important;
+    width: auto !important;
+    min-width: 60px !important;
+    /* white-space: nowrap !important; */
+}
+
+.dropdown-menu > li > a {
+    white-space: normal !important;
+}
+
+.dropdown-item:hover {
+    background-color: #f1cea1 !important;
+}
+
+.dropdown-item:focus {
+    background-color: #8b4e42 !important;
 }
 
 #dropicon {
-    align-self:center;
+    align-self: center;
 }
 
 #result {

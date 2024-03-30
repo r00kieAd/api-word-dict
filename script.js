@@ -25,6 +25,7 @@ async function triggerWordsAPI() {
         };
         const response = await fetch(url, options);
         const result = await response.text();
+        // alert(result)
         switch (endpoint) {
             case 'definitions':
                 getDefinitions(JSON.parse(result));
@@ -48,8 +49,7 @@ async function triggerWordsAPI() {
 }
 
 function showResult() {
-    const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 150;
-    // alert(($('#result').css('height')).slice(0, -2));
+    const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 180;
     $('#main').animate({
         height: resHeight
     }, 400);
@@ -67,28 +67,39 @@ function getDefinitions(wordObj) {
 function getSynonyms(wordObj) {
     if ((wordObj.synonyms).length == 0) {
         $('#output').text('no synonyms found');
-        return
+    } else {
+        $('#output').text(wordObj.synonyms);
     }
-    $('#output').text(wordObj.synonyms);
     showResult();
 }
 
 function getAntonyms(wordObj) {
     if ((wordObj.antonyms).length == 0) {
         $('#output').text('no antonyms found');
-        return
+    } else {
+        $('#output').text(wordObj.antonyms);
     }
-    $('#output').text(wordObj.antonyms);
     showResult();
 }
 
 function getExamples(wordObj) {
     if ((wordObj.examples).length == 0) {
         $('#output').text('no examples found');
-        return
+    } else {
+        $('#output').text(wordObj.examples);
     }
-    $('#output').text(wordObj.examples);
     showResult();
+}
+
+function setDropArrowDirection() {
+    let clsList = ($('#dropicon').attr('class')).split(' ');
+    if (clsList.includes('up')) {
+        $('#dropicon').css('transform', 'rotate(180deg)');
+        $('#dropicon').removeClass('up');
+        return;
+    }
+    $('#dropicon').addClass('up');
+    $('#dropicon').css('transform', 'rotate(360deg)');
 }
 
 // DOM
@@ -98,13 +109,13 @@ $(".endpoints .dropdown-menu .dropdown-item").click(
         const oldText = $('#setValue').text();
         $('#setValue').text(newText);
         $(this).text(oldText);
-        $('#dropicon').css('transform', 'rotate(360deg)');
+        setDropArrowDirection();
     }
 )
 
 $('#setValue').click(
     function () {
-        $('#dropicon').css('transform', 'rotate(180deg)');
+        setDropArrowDirection();
     }
 )
 
