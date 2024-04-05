@@ -5,7 +5,7 @@ body {
     font-family: "Titillium Web", sans-serif;
     font-weight: 400;
     font-style: normal;
-
+    overflow: hidden;
 }
 
 #main {
@@ -14,15 +14,36 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 30rem;
+    max-height: 95vh;
     border: 1px solid #e48a60;
     border-radius: 12px;
     background-color: #e48a60;
     box-shadow: 1px 1px 2px #8b4e42;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #sub-main {
     position: relative;
     padding: 1% 5% 5% 5%;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: auto;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 0.1px solid black;
+    border-radius: 10px;
+    background-color: black;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar-button {
+    height: 10px;
+    background-color: black;
+    visibility: hidden;
 }
 
 /* #main-form {
@@ -97,14 +118,15 @@ body {
     background-color: #8b4e42 !important;
 }
 
-#dropicon {
+#dropicon, #droploader {
     align-self: center;
+    margin-bottom: 2px;
 }
 
 #result {
     display: none;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     height: auto;
 }
 
@@ -112,4 +134,7 @@ body {
     font-size: 16px;
     font-weight: 400;
     word-break: break-all;
+    line-height: 1.5 !important;
+    word-spacing: 1.5 !important;
+    letter-spacing: 10;
 }

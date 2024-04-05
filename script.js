@@ -23,6 +23,8 @@ async function triggerWordsAPI() {
                 'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
             }
         };
+        $('#dropicon').hide();
+        $('#droploader').show();
         const response = await fetch(url, options);
         const result = await response.text();
         // alert(result)
@@ -49,18 +51,29 @@ async function triggerWordsAPI() {
 }
 
 function showResult() {
-    const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 180;
+    const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 200;
     $('#main').animate({
         height: resHeight
     }, 400);
     $('#result').fadeIn();
+    $('#dropicon').show();
+    $('#droploader').hide();
 }
 
 function getDefinitions(wordObj) {
+    alert((wordObj.definitions).length);
+    var def = "";
     if ((wordObj.definitions).length > 1) {
-        // enable user to download the definitions in a text file
+        wordObj.definitions.forEach(w => {
+            def += w.definition + ', ';
+        });
+        def = def.replace(/[,]/, ''); 
+    } else {
+        def = wordObj.definitions[0].definition;
+        alert(wordObj.definitions[0].definition);
+        // alert(def);
     }
-    $('#output').text(wordObj.definitions[0].definition);
+    $('#output').text(def);
     showResult();
 }
 
