@@ -18,7 +18,6 @@ async function triggerWordsAPI() {
         const options = {
             method: 'GET',
             headers: {
-                // 2fc7fe89abmsh68aeb886c1c625ep1b9607jsn4cece20a50db
                 'X-RapidAPI-Key': '2fc7fe89abmsh68aeb886c1c625ep1b9607jsn4cece20a50db',
                 'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
             }
@@ -27,7 +26,6 @@ async function triggerWordsAPI() {
         $('#droploader').show();
         const response = await fetch(url, options);
         const result = await response.text();
-        // alert(result)
         switch (endpoint) {
             case 'definitions':
                 getDefinitions(JSON.parse(result));
@@ -50,7 +48,8 @@ async function triggerWordsAPI() {
     }
 }
 
-function showResult() {
+function showResult(res) {
+    $('#output').text(res);
     const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 200;
     $('#main').animate({
         height: resHeight
@@ -61,47 +60,62 @@ function showResult() {
 }
 
 function getDefinitions(wordObj) {
-    alert((wordObj.definitions).length);
-    var def = "";
+    let def = "";
     if ((wordObj.definitions).length > 1) {
         wordObj.definitions.forEach(w => {
-            def += w.definition + ', ';
+            def += w.definition + ' | ';
         });
-        def = def.replace(/[,]/, ''); 
+        def = (def.trim()).slice(0, -1);
     } else {
         def = wordObj.definitions[0].definition;
-        alert(wordObj.definitions[0].definition);
-        // alert(def);
     }
-    $('#output').text(def);
-    showResult();
+    showResult(def);
 }
 
 function getSynonyms(wordObj) {
+    let syn = "";
     if ((wordObj.synonyms).length == 0) {
-        $('#output').text('no synonyms found');
+        syn = "no synonyms found";
+    } else if ((wordObj.synonyms).length > 1) {
+        wordObj.synonyms.forEach(s => {
+            syn += s + ' | ';
+        });
+        syn = (syn.trim()).slice(0, -1);
     } else {
-        $('#output').text(wordObj.synonyms);
+        syn = wordObj.synonyms;
     }
-    showResult();
+    showResult(syn);
 }
 
 function getAntonyms(wordObj) {
+    let ant = "";
     if ((wordObj.antonyms).length == 0) {
-        $('#output').text('no antonyms found');
+        ant = "no antonyms found";
+    } else if ((wordObj.antonyms).length > 1) {
+        wordObj.antonyms.forEach(a => {
+            ant += a + ' | ';
+        });
+        ant = (ant.trim()).slice(0, -1);
     } else {
-        $('#output').text(wordObj.antonyms);
+        ant = wordObj.antonyms;
     }
-    showResult();
+    showResult(ant);
 }
 
 function getExamples(wordObj) {
+    let exp = "";
+    alert(wordObj.examples);
     if ((wordObj.examples).length == 0) {
-        $('#output').text('no examples found');
+        exp = "no examples found";
+    } else if ((wordObj.examples).length > 1) {
+        wordObj.examples.forEach(e => {
+            exp += e + ' | ';
+        });
+        exp = (exp.trim()).slice(0, -1);
     } else {
-        $('#output').text(wordObj.examples);
+        exp = wordObj.examples;
     }
-    showResult();
+    showResult(exp);
 }
 
 function setDropArrowDirection() {
