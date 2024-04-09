@@ -10,41 +10,37 @@ const wordDefinationsEndpoints = new Map < String > ([
 ])
 
 async function triggerWordsAPI() {
-    try {
-        const word = ($('#wordInput').val() == '') ? 'empty' : $('#wordInput').val();
-        const endpoint = (($('#setValue').text()).toLowerCase()).trim();
-        const url = `https://wordsapiv1.p.rapidapi.com/words/${word}/${endpoint}`;
-        console.log(`GET url: ${url}`);
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '2fc7fe89abmsh68aeb886c1c625ep1b9607jsn4cece20a50db',
-                'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-            }
-        };
-        $('#dropicon').hide();
-        $('#droploader').show();
-        const response = await fetch(url, options);
-        const result = await response.text();
-        switch (endpoint) {
-            case 'definitions':
-                getDefinitions(JSON.parse(result));
-                break;
-            case 'synonyms':
-                getSynonyms(JSON.parse(result));
-                break;
-            case 'antonyms':
-                getAntonyms(JSON.parse(result));
-                break;
-            case 'examples':
-                getExamples(JSON.parse(result));
-                break;
-            default:
-                break;
+    const word = ($('#wordInput').val() == '') ? 'empty' : $('#wordInput').val();
+    const endpoint = (($('#setValue').text()).toLowerCase()).trim();
+    const url = `https://wordsapiv1.p.rapidapi.com/words/${word}/${endpoint}`;
+    console.log(`GET url: ${url}`);
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '2fc7fe89abmsh68aeb886c1c625ep1b9607jsn4cece20a50db',
+            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
         }
-    } catch (error) {
-        $('#output').text(error);
-        showResult();
+    };
+    $('#dropicon').hide();
+    $('#droploader').show();
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log(result);
+    switch (endpoint) {
+        case 'definitions':
+            getDefinitions(JSON.parse(result));
+            break;
+        case 'synonyms':
+            getSynonyms(JSON.parse(result));
+            break;
+        case 'antonyms':
+            getAntonyms(JSON.parse(result));
+            break;
+        case 'examples':
+            getExamples(JSON.parse(result));
+            break;
+        default:
+            break;
     }
 }
 
@@ -128,9 +124,14 @@ function setDropArrowDirection() {
     $('#dropicon').addClass('up');
     $('#dropicon').css('transform', 'rotate(360deg)');
 }
+$(".dropdown-menu").on("hide.bs.dropdown", function(){
 
+});
 // DOM
 $(".endpoints .dropdown-menu .dropdown-item").click(
+
+    
+
     function () {
         const newText = $(this).text();
         const oldText = $('#setValue').text();
@@ -140,7 +141,13 @@ $(".endpoints .dropdown-menu .dropdown-item").click(
     }
 )
 
-$('#setValue').click(
+$('#setValue').on({
+    click: function () {
+        setDropArrowDirection();
+    }
+})
+
+$('.endpoints').blur(
     function () {
         setDropArrowDirection();
     }
