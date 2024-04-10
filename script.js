@@ -10,7 +10,13 @@ const wordDefinationsEndpoints = new Map < String > ([
 ])
 
 async function triggerWordsAPI() {
+    $('#dropicon').hide();
+    $('#droploader').show();
     const word = ($('#wordInput').val() == '') ? 'empty' : $('#wordInput').val();
+    if (word == 'empty') {
+        showResult('Enter a word to continue...');
+        return;
+    }
     const endpoint = (($('#setValue').text()).toLowerCase()).trim();
     const url = `https://wordsapiv1.p.rapidapi.com/words/${word}/${endpoint}`;
     console.log(`GET url: ${url}`);
@@ -21,11 +27,8 @@ async function triggerWordsAPI() {
             'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
         }
     };
-    $('#dropicon').hide();
-    $('#droploader').show();
     const response = await fetch(url, options);
     const result = await response.text();
-    console.log(result);
     switch (endpoint) {
         case 'definitions':
             getDefinitions(JSON.parse(result));
@@ -100,7 +103,7 @@ function getAntonyms(wordObj) {
 
 function getExamples(wordObj) {
     let exp = "";
-    alert(wordObj.examples);
+    // alert(wordObj.examples);
     if ((wordObj.examples).length == 0) {
         exp = "no examples found";
     } else if ((wordObj.examples).length > 1) {
@@ -124,14 +127,9 @@ function setDropArrowDirection() {
     $('#dropicon').addClass('up');
     $('#dropicon').css('transform', 'rotate(360deg)');
 }
-$(".dropdown-menu").on("hide.bs.dropdown", function(){
 
-});
 // DOM
 $(".endpoints .dropdown-menu .dropdown-item").click(
-
-    
-
     function () {
         const newText = $(this).text();
         const oldText = $('#setValue').text();
@@ -143,6 +141,10 @@ $(".endpoints .dropdown-menu .dropdown-item").click(
 
 $('#setValue').on({
     click: function () {
+        setDropArrowDirection();
+    },
+
+    blur: function () {
         setDropArrowDirection();
     }
 })

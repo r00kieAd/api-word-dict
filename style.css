@@ -29,20 +29,16 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 2px;
-    height: auto;
+    width: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    border: 0.1px solid #8b4e42;
-    border-radius: 10px;
     background-color: #8b4e42;
-    overflow: hidden;
-}
-
-::-webkit-scrollbar-button {
-    height: 10px;
-    visibility: hidden;
+    border-radius: 10px;
 }
 
 #heading {
