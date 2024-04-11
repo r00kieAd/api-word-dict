@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="Images/Screenshot.png" alt="Api Word Dict" width="200px" height="200px" />
+  <img src="Images/Screenshot.png" alt="Api Word Dict" width="500px" height="200px" />
   &#xa0;
 </div>
 
