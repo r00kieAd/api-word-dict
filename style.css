@@ -1,7 +1,7 @@
 body {
-    background-image: url("Images/background-2.png");
+    background-image: url("Images/cozy_study_hall.jpeg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100vw 100vh;
     font-family: "Titillium Web", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -15,30 +15,35 @@ body {
     transform: translate(-50%, -50%);
     width: 30rem;
     max-height: 95vh;
-    border: 1px solid #e48a60;
+    border: 1px solid transparent;
     border-radius: 12px;
-    background-color: #e48a60;
-    box-shadow: 1px 1px 2px #8b4e42;
-    overflow-y: scroll;
+    background-color: #436850;
+    color: #222831;
+    box-shadow: 1px 1px 2px #436850;
     overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 #sub-main {
     position: relative;
-    padding: 1% 5% 5% 5%;
+    padding: 2% 5% 5% 5%;
+    /* overflow: hidden; */
 }
 
 ::-webkit-scrollbar {
-    width: 5px !important;
+    width: 3px !important;
+    min-height: auto;
+    max-height: 90% !important;
 }
 
 ::-webkit-scrollbar-track {
     background-color: transparent;
+    margin: 10px 0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #8b4e42;
-    border-radius: 10px;
+    background-color: #ADBC9F;
+    border-radius: 24px;
 }
 
 #heading {
@@ -47,24 +52,25 @@ body {
 }
 
 #wordInput {
-    border-color: #f1cea1;
+    border-color: #436850;
 }
 
 #wordInput:focus {
-    border-color: #8b4e42;
+    border-color: #ADBC9F;
     outline: none !important;
     box-shadow: none !important;
 }
 
 #getValue {
-    background-color: #8b4e42;
-    border-color: #8b4e42;
+    background-color: #ADBC9F;
+    border-color: #ADBC9F;
+    color: #222831;
 }
 
 #getValue:hover {
-    background-color: #f1cea1;
-    border-color: #f1cea1;
-    color: #8b4e42
+    background-color: transparent;
+    /* border-color: #ffffff; */
+    /* color: #8b4e42; */
 }
 
 .dropdown-toggle::after {
@@ -99,11 +105,11 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: #f1cea1 !important;
+    background-color: #E1F0DA !important;
 }
 
 .dropdown-item:focus {
-    background-color: #8b4e42 !important;
+    background-color: #ADBC9F !important;
 }
 
 #dropicon,
@@ -114,16 +120,45 @@ body {
 
 #result {
     display: none;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 600;
     height: auto;
 }
 
 #output {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 400;
     word-break: keep-all;
     line-height: 1.5 !important;
     word-spacing: 1.5 !important;
     letter-spacing: 10;
+    color: #CCD3CA;
+}
+
+@media screen and (max-width: 1576px) {
+
+    body {
+        background-size: 100vw 100vh;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    #main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-height: 95vh;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        background-color: #436850;
+        color: #222831;
+        box-shadow: 1px 1px 2px #436850;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
 }

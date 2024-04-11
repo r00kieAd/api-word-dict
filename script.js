@@ -49,7 +49,7 @@ async function triggerWordsAPI() {
 
 function showResult(res) {
     $('#output').text(res);
-    const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 200;
+    const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 220;
     $('#main').animate({
         height: resHeight
     }, 400);
