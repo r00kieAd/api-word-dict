@@ -163,3 +163,9 @@ body {
     }
 
 }
+
+@media screen and (max-width: 420px) {
+    #wordInput {
+        width: 110px;
+    }
+}
