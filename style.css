@@ -53,6 +53,7 @@ body {
 
 #wordInput {
     border-color: #436850;
+    width: 150px;
 }
 
 #wordInput:focus {
