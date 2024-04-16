@@ -51,6 +51,7 @@ async function triggerWordsAPI() {
 }
 
 function showResult(res) {
+    $('#main').attr('data-info', 'showing results');
     $('#output').text(res);
     const resHeight = parseInt(($('#result').css('height')).slice(0, -2)) + 220;
     $('#main').animate({
@@ -131,6 +132,24 @@ function setDropArrowDirection() {
     $('#dropicon').css('transform', 'rotate(360deg)');
 }
 
+function adjustMainHeight() {
+    const mainHeight = $('#main').attr('data-info');
+    if (mainHeight == 'showing results') {
+        return;
+    }
+    if (mainHeight == 'normal') {
+        $('#main').animate({
+            height: parseInt(($('#main').css('height')).slice(0, -2)) + 70
+        }, 400);
+        $('#main').attr('data-info', 'expanded');
+    } else {
+        $('#main').animate({
+            height: parseInt(($('#main').css('height')).slice(0, -2)) - 70
+        }, 400);
+        $('#main').attr('data-info', 'normal');
+    }
+}
+
 // DOM
 $(".endpoints .dropdown-menu .dropdown-item").click(
     function () {
@@ -139,11 +158,13 @@ $(".endpoints .dropdown-menu .dropdown-item").click(
         $('#setValue').text(newText);
         $(this).text(oldText);
         setDropArrowDirection();
+        adjustMainHeight();
     }
 )
 
 $('#setValue').on({
     click: function () {
+        adjustMainHeight();
         setDropArrowDirection();
     },
 

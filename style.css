@@ -53,7 +53,8 @@ body {
 
 #wordInput {
     border-color: #436850;
-    width: 150px;
+    max-width: 200px;
+    /* min-width: 150px; */
 }
 
 #wordInput:focus {
@@ -66,6 +67,7 @@ body {
     background-color: #ADBC9F;
     border-color: #ADBC9F;
     color: #222831;
+    width: 80px;
 }
 
 #getValue:hover {
@@ -162,10 +164,4 @@ body {
         overflow-y: scroll;
     }
 
-}
-
-@media screen and (max-width: 420px) {
-    #wordInput {
-        width: 110px;
-    }
 }
