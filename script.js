@@ -1,14 +1,3 @@
-const wordDefinationsEndpoints = new Map < String > ([
-    ["input", "input"],
-    ["Definition", "definitions"],
-    ["Synonyms", "synonyms"],
-    ["Antonyms", "antonyms"],
-    ["Examples", "examples"],
-    ["Rhymes", "rhymes"],
-    ["Pronunciation", "pronunciation"],
-    ["Syllables", "syllables"]
-])
-
 async function triggerWordsAPI() {
     $('#dropicon').hide();
     $('#droploader').show();
@@ -29,22 +18,36 @@ async function triggerWordsAPI() {
     };
     const response = await fetch(url, options);
     const result = await response.text();
-    switch (endpoint) {
-        case 'definitions':
-            getDefinitions(JSON.parse(result));
-            break;
-        case 'synonyms':
-            getSynonyms(JSON.parse(result));
-            break;
-        case 'antonyms':
-            getAntonyms(JSON.parse(result));
-            break;
-        case 'examples':
-            getExamples(JSON.parse(result));
-            break;
-        default:
-            break;
+    const statusCode = response.status;
+    const finalResult = JSON.parse(result);
+    if (statusCode == 404) {
+        showResult(finalResult.message);
+        return;
+    } else if (statusCode != 200) {
+        alert(finalResult);
+    } else {
+        try {
+            switch (endpoint) {
+                case 'definitions':
+                    getDefinitions(finalResult);
+                    break;
+                case 'synonyms':
+                    getSynonyms(finalResult);
+                    break;
+                case 'antonyms':
+                    getAntonyms(finalResult);
+                    break;
+                case 'examples':
+                    getExamples(finalResult);
+                    break;
+                default:
+                    break;
+            }
+        } catch (error) {
+            showResult('Error occured, try again!')
+        }
     }
+
 }
 
 function showResult(res) {
